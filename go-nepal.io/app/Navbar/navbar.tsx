@@ -83,19 +83,17 @@ export default function Navbar() {
         {/* Desktop Right */}
         <div className="hidden md:flex items-center gap-4">
           <button
-            className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium  ${
-              isScrolled
-                ? "border-slate-200 bg-white text-slate-900 shadow-sm hover:shadow"
-                : " border border-gray-400 bg-amber-50 text-black hover:bg-white/20"
+            className={`flex items-center gap-2 rounded-full border border-gray-400 px-4 py-2 text-sm font-medium transition-colors ${
+              isScrolled ? "bg-white text-slate-900" : "bg-amber-50 text-black"
             }`}
           >
-            <Search className="h-4 w-4" /> Explore
+            <Search className="h-4 w-4" />
+            Explore
           </button>
+
           <button
-            className={`rounded-full px-5 py-2 text-sm font-semibold transition-all  ${
-              isScrolled
-                ? "bg-slate-900 text-white hover:bg-slate-800"
-                : "bg-white border border-gray-400 text-slate-900 hover:bg-slate-100"
+            className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${
+              isScrolled ? "bg-slate-900 text-white" : "bg-white text-slate-900"
             }`}
           >
             Login
