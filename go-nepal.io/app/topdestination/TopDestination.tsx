@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Link from "next/link";
 import DestinationCart from "../destinationcart/DestinationCart";
 import type { StaticImageData } from "next/image";
 import { toursDummyData } from "@/components/assets/assets";
@@ -21,11 +22,10 @@ type Tour = {
 };
 
 export default function TopDestination() {
-  const [showAll, setShowAll] = useState(false);
   const tours = toursDummyData;
 
-  // Determine which tours to display
-  const displayedTours = showAll ? tours : tours.slice(0, 3);
+  // Determine which tours to display (Top 3)
+  const displayedTours = tours.slice(0, 3);
   const hasMoreTours = tours.length > 3;
 
   return (
@@ -51,17 +51,18 @@ export default function TopDestination() {
         </div>
 
         {/* Bottom CTA */}
-        {!showAll && hasMoreTours && (
+        {hasMoreTours && (
           <div className="mt-12 pt-8 border-t border-amber-100 text-center">
             <p className="text-slate-600 mb-4">
-              Explore all {tours.length - 3} more amazing destinations
+              Explore all our amazing destinations and tour packages
             </p>
-            <Button
-              onClick={() => setShowAll(true)}
-              className="px-6 py-3 bg-linear-to-r from-slate-900 to-slate-700 hover:from-slate-800 hover:to-slate-600 text-white font-semibold shadow-md transition-colors duration-200"
-            >
-              View All Tours
-            </Button>
+            <Link href="/destinations">
+              <Button
+                className="px-6 py-3 bg-linear-to-r from-slate-900 to-slate-700 hover:from-slate-800 hover:to-slate-600 text-white font-semibold shadow-md transition-colors duration-200"
+              >
+                View All Tours
+              </Button>
+            </Link>
           </div>
         )}
       </div>
