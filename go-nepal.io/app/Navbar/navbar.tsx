@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, Search, Mountain } from "lucide-react";
+import AuthModal from "@/components/AuthModal";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -16,6 +17,8 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -92,7 +95,11 @@ export default function Navbar() {
           </button>
 
           <button
-            className={`rounded-full px-5 py-2 text-sm font-medium border border-gray-400 transition-colors ${
+            onClick={() => {
+              setAuthMode("login");
+              setIsAuthOpen(true);
+            }}
+            className={`rounded-full px-5 py-2 text-sm font-medium border border-gray-400 cursor-pointer transition-colors ${
               isScrolled ? "bg-slate-900 text-white" : "bg-amber-50 text-slate-900"
             }`}
           >
@@ -185,11 +192,19 @@ export default function Navbar() {
             </span>
             <span className="text-xs text-slate-500">New</span>
           </button>
-          <button className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition-colors">
+          <button
+            onClick={() => {
+              setIsMenuOpen(false);
+              setAuthMode("login");
+              setIsAuthOpen(true);
+            }}
+            className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition-colors text-center cursor-pointer"
+          >
             Login
           </button>
         </div>
       </div>
+      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} initialView={authMode} />
     </nav>
   );
 }
